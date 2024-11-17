@@ -1,0 +1,76 @@
+-------------------------------------------CURL create users-----------------
+
+
+curl -X POST http://localhost:5001/users \
+     -H "Content-Type: application/json" \
+     -d '{
+           "users": [
+             {"username": "Lucas", "code": "1"},
+             {"username": "Ana", "code": "2"},
+             {"username": "Felipe", "code": "3"},
+             {"username": "Beatriz", "code": "4"},
+             {"username": "Carlos", "code": "5"}
+           ]
+         }'
+------------------------------------------GET users-------------------------------------------------
+
+http://localhost:5001/users
+
+------------------------------------------CURL create quiz ---------------------------------------
+
+
+curl -X POST http://localhost:5001/quizzes \
+     -H "Content-Type: application/json" \
+     -d '{
+           "id": "1",
+           "questions": [
+             {
+               "id": "q1",
+               "text": "Qual é a capital do Brasil?",
+               "correct_answer": "b",
+               "options": {
+                 "a": "São Paulo",
+                 "b": "Brasília",
+                 "c": "Rio de Janeiro",
+                 "d": "Belo Horizonte"
+               }
+             },
+             {
+               "id": "q2",
+               "text": "Qual é a maior montanha do mundo?",
+               "correct_answer": "b",
+               "options": {
+                 "a": "K2",
+                 "b": "Everest",
+                 "c": "Kangchenjunga",
+                 "d": "Lhotse"
+               }
+             }
+           ]
+         }'
+
+-----------------------------------------GET quiz-------------------------------------------
+
+http://localhost:5001/quizzes/1/questions/q1
+
+-----------------------------------------CURL ansewrs---------------------------------------------
+
+curl -X POST http://localhost:5001/quizzes/1/answer \
+     -H "Content-Type: application/json" \
+     -d '{
+           "question_id": "q1",
+           "answer": "b",
+           "student_id": "1"
+         }'
+
+-----------------------------------------GET responses ------------------------
+
+http://localhost:5001/quizzes/1/responses?question_id=q1          
+
+-----------------------------------------get Ranking---------------------------------------------
+
+http://localhost:5001/quizzes/1/ranking
+
+-----------------------------------------get analytics------------------------------------------
+
+http://localhost:5001/quizzes/1/analytics?question_id=q1
